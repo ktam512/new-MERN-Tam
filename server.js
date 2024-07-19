@@ -12,6 +12,7 @@ app.use(cors())
 app.use(fileUpload({
   useTempFiles:true
 }))
+app.use('/user', require('./routers/userRouter'))
 // connect to mongodb
 const URI = process.env.MONGODB_URL;
 
