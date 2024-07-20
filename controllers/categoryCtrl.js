@@ -24,6 +24,14 @@ createCategory:async (req,res)=>{
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
+},
+deleteCategory: async (req,res)=>{
+    try {
+        await Category.findByIdAndDelete(req.params.id)
+        res.json({msg: "category deleted successfully"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
 }
 
 }
