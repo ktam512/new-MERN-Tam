@@ -13,7 +13,6 @@ cloudinary.config({
 
 router.post('/upload', (req,res)=>{
     try {
-        console.log(req.files)
         if(!req.files || Object.keys(req.files).length === 0)
             return res.status(400).json({msg: 'No files were uploaded'})
 
@@ -29,7 +28,7 @@ router.post('/upload', (req,res)=>{
         cloudinary.v2.uploader.upload(file.tempFilePath, {folder:"test"},async(err,result)=>{
             if(err) throw err;
             
-            res.json({result})
+            res.json({public_id: result.public_id, url: result.secure_url})
         })
     
     } catch (err) {
