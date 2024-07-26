@@ -9,7 +9,27 @@ import "./Header.css"
 
 
 function Header() {
-    const value = useContext(GlobalState)
+    const state = useContext(GlobalState)
+    const [isLogged, setIsLogged] = state.userAPI.isLogged
+    const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
+
+    const adminRouter = () =>{
+        return (
+            <>
+            <li><Link to="/create_product">Create Product</Link></li>
+            <li><Link to="/category">Categories</Link></li>
+            </>
+        )
+    }
+
+    const loggedRouter = () =>{
+        return (
+            <>
+            <li><Link to="/history">history</Link></li>
+            <li><Link to="/">Logout</Link></li>
+            </>
+        )
+    }
     return (
         <header>
             <div className = "menu">
@@ -18,7 +38,7 @@ function Header() {
             </div>
             <div className = "logo">
                 <h1>
-                    <Link to="/">My Shop</Link>
+                    <Link to="/">{isAdmin ? 'Admin' : 'My Shop'}</Link>
                 </h1>
             </div>
 
