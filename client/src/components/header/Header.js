@@ -6,12 +6,15 @@ import Menu from "./icons/bar.svg"
 import Cart from "./icons/cart.svg"
 import Close from "./icons/close.svg" 
 import "./Header.css"
+import axios from 'axios';
 
 
 function Header() {
     const state = useContext(GlobalState)
     const [isLogged, setIsLogged] = state.userAPI.isLogged
     const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
+    const addCart = state.userAPI.addCart
+    const [cart] = state.userAPI.cart
 
     const adminRouter = () =>{
         return (
@@ -21,12 +24,18 @@ function Header() {
             </>
         )
     }
+    const loggedOut = async () =>{
+        await axios.get('/user/logout')
+        localStorage.clear()
+        setIsAdmin(false)
+        setIsLogged(false)
+    }
 
     const loggedRouter = () =>{
         return (
             <>
             <li><Link to="/history">history</Link></li>
-            <li><Link to="/">Logout</Link></li>
+            <li><Link to="/" onClick={loggedOut}>Logout</Link></li>
             </>
         )
     }
@@ -43,19 +52,24 @@ function Header() {
             </div>
 
             <ul>
-                <li><Link to="/">Products</Link></li>
-                <li><Link to="/login">Login & Register</Link></li>
+                <li><Link to="/">{isAdmin ? 'Products' : 'Shop'}</Link></li>
+                {
+                isAdmin && adminRouter()
+                }{
+                  isLogged ? loggedRouter() :  <li><Link to="/login">Login & Register</Link></li>
+                }
                 <li>
                     <img src={Close} alt= "" width = "30" className = "menu"/>
                 </li>
             </ul>
-
-            <div className = "cart-icon">
-                <span>0</span>
-                <Link to="/cart">
-                    <img src={Cart} alt= "" width = "40"/>
-                </Link>
-            </div>
+{       isAdmin ?  ' '
+          : <div className="cart-icon">
+              <span>{cart.length}</span>
+              <Link to="/cart">
+                  <img src={Cart} alt="" width="40"/>
+              </Link>
+          </div>
+}
         </header>
     )
 }
