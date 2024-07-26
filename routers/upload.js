@@ -13,12 +13,15 @@ cloudinary.config({
 
 router.post('/upload', auth, authAdmin, (req,res) =>{
     try {
-      
+        console.log(req.files)
         if(!req.files || Object.keys(req.files).length === 0)
         return res.status(400).json({msg: 'No files were uploaded'})
 
         const file= req.files.file;
-        console.log(req.files);
+        // Check if the file object is undefined 
+        if (file === undefined) {
+            return res.status(400).json({ msg: 'File is undefined' });
+        }
 
         if(file.size > 1024*1024) {  
             removeTemp(file.tempFilePath)
