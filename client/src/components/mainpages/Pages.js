@@ -5,6 +5,7 @@ import Login from './auth/Login'
 import Register from './auth/Register'
 import Cart from './cart/Cart'
 import NotFound from './utils/not_found/NotFound'
+import DetailProduct from './products/detailProducts/DetailProduct'
 
 function Pages() {
     return (
@@ -13,6 +14,7 @@ function Pages() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/detail/:id" exact component={DetailProduct}/>
             <Route path="*" element={<NotFound />} />
         </Routes>
     )
