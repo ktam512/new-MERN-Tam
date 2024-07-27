@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Products from './products/Products'
 import Login from './auth/Login'
@@ -7,13 +7,17 @@ import Cart from './cart/Cart'
 import NotFound from './utils/not_found/NotFound'
 import DetailProduct from './products/detailProducts/DetailProduct'
 
+import {GlobalState} from "../../GlobalState"
+
 function Pages() {
+    const state = useContext(GlobalState)
+    const [isLogged] = state.userAPI.isLogged
     return (
         <Routes>
             <Route path="/" element={<Products />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={isLogged ? NotFound : Login} />
+            <Route path="/register" element={isLogged ? NotFound : Register} />
+            <Route path="/cart" element={Cart} />
             <Route path="/detail/:id" element={<DetailProduct />}/>
             <Route path="*" element={<NotFound />} />
         </Routes>

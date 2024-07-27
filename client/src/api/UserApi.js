@@ -15,6 +15,7 @@ function UserAPI(token) {
                     })
                     setIsLogged(true)
                     res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
+                    setCart(res.data.cart)
 
                 } catch (err){
                     alert(err.response.data.msg)
@@ -34,6 +35,10 @@ function UserAPI(token) {
 
         if(check) {
             setCart([...cart, {...product, quantity: 1}])
+
+            await axios.patch('/user/addcart', {cart: [...cart, {...product, quantity: 1}]}, {
+                headers: {Authorization : token}
+            })
 
         } else {
             alert('this product has been added to the Cart')
