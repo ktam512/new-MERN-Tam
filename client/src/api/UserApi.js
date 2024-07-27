@@ -5,7 +5,6 @@ function UserAPI(token) {
     const [isLogged, setIsLogged] = useState(false)
     const [isAdmin, setIsAdmin]= useState(false)
     const [cart, setCart] = useState([])
-    
     useEffect(()=>{
         if(token){
             const getUser = async() =>{
@@ -16,16 +15,14 @@ function UserAPI(token) {
                     setIsLogged(true)
                     res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
                     setCart(res.data.cart)
-
-                } catch (err){
+                } catch (err) {
                     alert(err.response.data.msg)
                 }
             }
             getUser()
         }
-
-        
     },[token])
+
     const addCart = async (product) =>{
         if(!isLogged) return alert('Please Login to continue buying')
 
@@ -39,7 +36,6 @@ function UserAPI(token) {
             await axios.patch('/user/addcart', {cart: [...cart, {...product, quantity: 1}]}, {
                 headers: {Authorization : token}
             })
-
         } else {
             alert('this product has been added to the Cart')
         }
@@ -47,9 +43,11 @@ function UserAPI(token) {
     return {
         isLogged :[isLogged, setIsLogged],
         isAdmin:[isAdmin, setIsAdmin],
-        addCart: addCart,
-        cart:[cart, setCart]
+        addCart:addCart,
+        cart:[cart,setCart]
     }
+        
+    
 }
 
 export default UserAPI

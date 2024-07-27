@@ -15,10 +15,10 @@ function Pages() {
     return (
         <Routes>
             <Route path="/" element={<Products />} />
-            <Route path="/login" element={isLogged ? NotFound : Login} />
-            <Route path="/register" element={isLogged ? NotFound : Register} />
-            <Route path="/cart" element={Cart} />
-            <Route path="/detail/:id" element={<DetailProduct />}/>
+            <Route path="/login" element={isLogged ? <NotFound /> : <Login />} />
+            <Route path="/register" element={isLogged ? <NotFound /> : <Register />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/detail/:id" element={<DetailProduct />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )
