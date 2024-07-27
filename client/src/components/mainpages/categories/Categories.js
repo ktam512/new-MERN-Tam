@@ -14,12 +14,21 @@ function Categories() {
     const createCategory = async (e) => {
         e.preventDefault()
         try {
-                const res = await axios.post(`/api/category/`, {name: category},{
+            if(onEdit){
+                const res = await axios.put(`/api/category/${id}`, {name: category},{
                     headers: {Authorization : token}
                 })
-                setCategory(' ')
-                setCallback(!callback)
-                alert(res.data.msg) 
+               
+                alert(res.data.msg)
+            }else {
+                const res = await axios.post('/api/category', {name: category},{
+                    headers: {Authorization : token}
+                })
+               
+                alert(res.data.msg)
+            }
+            setCategory('')
+            setCallback(!callback)
         } catch (err) {
             alert(err.response.data.msg)
         }
@@ -28,6 +37,17 @@ function Categories() {
         setID(id)
         setCategory(name)
         setOnEdit(true)
+}
+const deleteCategory = async (id) =>{
+    try {
+        const res = await axios.delete(`/api/category/${id}`,{
+            headers: {Authorization : token}
+        })
+        alert(res.data.msg)
+        setCallback(!callback)
+    } catch (err) {
+        alert(err.response.data.msg)
+    }
 }
     return (
         <div className="categories">
@@ -44,7 +64,7 @@ function Categories() {
                         <p>{category.name}</p>
                         <div>
                         <button onClick={()=>editCategory(category._id, category.name)}>Edit</button>
-                        <button>Delete</button>
+                        <button  onClick={()=>deleteCategory(category._id)}>Delete</button>
                         </div>
                         </div>
                 ))
