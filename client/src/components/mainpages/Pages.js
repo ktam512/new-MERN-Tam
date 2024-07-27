@@ -8,6 +8,7 @@ import NotFound from './utils/not_found/NotFound'
 import DetailProduct from './products/detailProducts/DetailProduct'
 
 import {GlobalState} from "../../GlobalState"
+import Categories from './categories/Categories'
 
 function Pages() {
     const state = useContext(GlobalState)
@@ -17,6 +18,7 @@ function Pages() {
             <Route path="/" element={<Products />} />
             <Route path="/login" element={isLogged ? <NotFound /> : <Login />} />
             <Route path="/register" element={isLogged ? <NotFound /> : <Register />} />
+            <Route path="/category" element={isLogged ? <Categories/> : <NotFound /> }/>
             <Route path="/cart" element={<Cart />} />
             <Route path="/detail/:id" element={<DetailProduct />} />
             <Route path="*" element={<NotFound />} />

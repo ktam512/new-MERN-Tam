@@ -8,7 +8,7 @@ function Cart() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.userAPI.cart
     const [total, setTotal] = useState(0)
-   const [token] = state.token
+    const [token] = state.token
     useEffect(()=>{
             const getTotal = () =>{
                 const total = cart.reduce((prev,item)=>{
@@ -57,7 +57,6 @@ function Cart() {
         }
     }
     if(cart.length === 0) return <h2 style={{textAlign:'center' , fontSize:"5rem"}}>Cart Empty</h2>
-    
     return (
         <div>
         {
