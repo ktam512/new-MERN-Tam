@@ -70,6 +70,7 @@ function CreateProduct(){
                         }
                      </select>
                 </div>
+                <button type="submit">Create Product</button>
             </form>
             
         </div>
