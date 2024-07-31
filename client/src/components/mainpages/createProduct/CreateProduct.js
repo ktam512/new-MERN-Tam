@@ -21,9 +21,25 @@ function CreateProduct(){
     const [categories] = state.categoriesAPI.categories
     const [images, setImages] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [isAdmin] = state.userAPI.isAdmin
+
+    const styleUpload = {
+        display: images ? 'block' : 'none'
+    }
+    const handleUpload = async (e) =>{
+        e.preventDefault()
+        try{
+            if(!isAdmin) return alert("You are not an admin")
+            const file = e.target.files[0]
+        } catch(err){
+            alert(err.response.data.msg)
+        }
+    }
     return (
         <div className= "create_product">
             <div className = "upload">
+                <div>upload</div>
+                <div>type </div>
                 <input type ="file" name = "file" id = "file_up"></input>
                 <div id = "file_img">
                     <img src = "" alt = ""/>
