@@ -3,14 +3,14 @@ import axios from "axios";
 import {GlobalState} from "../../../GlobalState"
 import Loading from "../utils/Loading/Loading"
 import "./CreateProduct.css"
-import {useHistory, useParams} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
 const initialState = {
     product_id:'',
     title:'',
     price:0,
-    description:'How to write code . heh he he he he he hee h  e e he e',
-    content:'lorem ipsum is athe dummy text invented to write the nonsense to avoid writing the nonsense like i am writing at that point. Just Avoid it',
+    description:'Description of the product',
+    content:'Content of the product',
     category:'',
     _id: ''
 }
@@ -23,9 +23,14 @@ function CreateProduct(){
     const [loading, setLoading] = useState(false)
     const [isAdmin] = state.userAPI.isAdmin
     const [token] = state.token
+    const navigate = useNavigate()
 
     const styleUpload = {
         display: images ? 'block' : 'none'
+    }
+    const handleChangeInput = e => {
+        const {name, value} = e.target
+        setProduct({...product, [name]:value})
     }
     const handleUpload = async (e) =>{
         e.preventDefault()
@@ -50,49 +55,83 @@ function CreateProduct(){
             alert(err.response.data.msg)
         }
     }
+    const handleDestroy = async (e) => {
+        try {
+            if(!isAdmin) return alert('you are not an admin');
+            setLoading(true)
+            await axios.post('/api/destroy', {public_id: images.public_id},{
+                headers: {Authorization : token}
+            })
+            setLoading(false)
+            setImages(false)
+    
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            if(!isAdmin) return alert("you are not Admin")
+            if(!images) return alert("no image found")
+            await axios.post(`/api/products/`, {...product, images}, {
+                headers: {Authorization : token}
+            })
+            setImages(false)
+            setProduct(initialState)
+            navigate.push('/')
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
     return (
         <div className= "create_product">
             <div className = "upload"> 
-                <input type ="file" name = "file" id = "file_up" onClick = {handleUpload}></input>
-                <div id = "file_img" style={styleUpload}>
-                    <img src = "" alt = ""/>
-                    <span>x</span>
+                <input type ="file" name = "file" id = "file_up" onChange = {handleUpload}/>
+                {
+                    loading ? <div id = "file_img"><Loading/></div>
+
+                 :   <div id = "file_img" style={styleUpload}>
+                    <img src = {images ? images.url: ''} alt = ""/>
+                    <span onClick = {handleDestroy}>x</span>
                 </div>
+                }
+                
             </div>
-            <form>
+            <form onSubmit = {handleSubmit}>
                 <div className="row">
-                    <label htmlFor="product_id">Product_id</label>
+                    <label htmlFor="product_id">Product ID</label>
                     <input type="text" name="product_id" id="product_id"
-                    required value={product.product_id} />
+                    required value={product.product_id} onChange = {handleChangeInput}/>
                 </div>
                 <div className="row">
-                    <label htmlFor="Title">Title</label>
+                    <label htmlFor="title">Title</label>
                     <input type="text" name="title" id="title"
-                    required value={product.title} />
+                    required value={product.title} onChange = {handleChangeInput}/>
                 </div>
                 <div className="row">
                     <label htmlFor="price">Price</label>
                     <input type="number" name="price" id="price"
-                    required value={product.price} />
+                    required value={product.price} onChange = {handleChangeInput}/>
                 </div>
                 <div className="row">
                     <label htmlFor="description">Description</label>
                     <input type="text" name="description" id="description"
-                     required value={product.description} />
+                     required value={product.description} onChange = {handleChangeInput}/>
                 </div>
                 <div className="row">
                     <label htmlFor="content">Content</label>
                     <textarea rows = "5 "type="text" name="content" id="content"
-                     required value={product.content} />
+                     required value={product.content} onChange = {handleChangeInput}/>
                 </div>
                 <div className="row">
                     <label htmlFor="category">Category</label>
                     <select name="category" id="category"
-                     value={product.content}>
+                     value={product.category} onChange = {handleChangeInput}>
                         <option value =""> Please Select a category</option>
                         {
                             categories.map(category=>(
-                                <option value = {category._id}>
+                                <option key = {category._id} value = {category._id}>
                                     {category.name}
                                 </option>
                             ))
