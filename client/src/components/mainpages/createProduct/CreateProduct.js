@@ -22,26 +22,39 @@ function CreateProduct(){
     const [images, setImages] = useState(false)
     const [loading, setLoading] = useState(false)
     const [isAdmin] = state.userAPI.isAdmin
+    const [token] = state.token
 
     const styleUpload = {
         display: images ? 'block' : 'none'
     }
     const handleUpload = async (e) =>{
         e.preventDefault()
-        try{
-            if(!isAdmin) return alert("You are not an admin")
+        try {
+            if(!isAdmin) return alert("You are not an  Admin")
             const file = e.target.files[0]
-        } catch(err){
+            if(!file) return   alert("File not exist")
+            if(file.size > 1024 * 1024) return alert("Size is too large")
+            if(file.type !== "image/jpeg" && file.type !== "image/png") return alert("file type not supported")
+    
+            let formData = new FormData();
+            formData.append('file', file)
+    
+            setLoading(true)
+            const res = await  axios.post('/api/upload', formData, {
+                headers: {'content-type': 'multipart/form-data' , Authorization : token }
+            })
+            setLoading(false)
+            setImages(res.data)
+    
+        } catch (err) {
             alert(err.response.data.msg)
         }
     }
     return (
         <div className= "create_product">
-            <div className = "upload">
-                <div>upload</div>
-                <div>type </div>
-                <input type ="file" name = "file" id = "file_up"></input>
-                <div id = "file_img">
+            <div className = "upload"> 
+                <input type ="file" name = "file" id = "file_up" onClick = {handleUpload}></input>
+                <div id = "file_img" style={styleUpload}>
                     <img src = "" alt = ""/>
                     <span>x</span>
                 </div>
@@ -69,7 +82,7 @@ function CreateProduct(){
                 </div>
                 <div className="row">
                     <label htmlFor="content">Content</label>
-                    <input type="text" name="content" id="content"
+                    <textarea rows = "5 "type="text" name="content" id="content"
                      required value={product.content} />
                 </div>
                 <div className="row">
