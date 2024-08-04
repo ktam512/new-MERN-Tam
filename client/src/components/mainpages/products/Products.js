@@ -5,6 +5,7 @@ import ProductItem from '../utils/Product_item/ProductItem';
 import "./Product.css"
 import axios from "axios"
 import { set } from 'mongoose';
+import Filters from "../utils/Product_item/Filters"
 function Products() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productsAPI.products
@@ -50,6 +51,7 @@ function Products() {
     }
     return (
         <>
+        <Filters />
         {
             isAdmin &&
             <div className="delete-all" style={{textAlign:"right", margin:'20px'}}>
