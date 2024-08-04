@@ -10,7 +10,7 @@ function Products() {
     const [products, setProducts] = state.productsAPI.products
     const [isAdmin] = state.userAPI.isAdmin
     const addCart = state.userAPI.addCart
-    const [callback, setCallback] = state.productAPI.callback
+    const [callback, setCallback] = state.productsAPI.callback
   
     return (
         <>
