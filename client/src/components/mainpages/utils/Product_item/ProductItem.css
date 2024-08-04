@@ -1,94 +1,82 @@
-/* ProductItem.css */
 .product-card {
-    background-color: #fff;
+    position: relative;
+    border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    margin: 20px;
+    transition: transform 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.product-card input[type="checkbox"] {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .product-card img {
     width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
+    height: 200px;
     object-fit: cover;
 }
 
 .product_box {
-    padding: 15px;
+    padding: 20px;
+    text-align: center;
 }
 
 .product_box h2 {
     font-size: 1.5rem;
+    margin: 10px 0;
     color: #333;
-    margin-bottom: 10px;
 }
 
 .product_box span {
     font-size: 1.2rem;
     color: #27ae60;
-    margin-bottom: 10px;
+    margin: 10px 0;
     display: block;
 }
 
 .product_box p {
     font-size: 1rem;
     color: #777;
-    margin-bottom: 10px;
-    height: 60px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 10px 0;
 }
 
 .row_btn {
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    justify-content: space-around;
+    padding: 10px;
 }
 
 .row_btn a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #27ae60;
     padding: 10px 20px;
     border-radius: 5px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.3s ease;
 }
 
-#btn_buy {
-    background-color: #27ae60;
-    color: #fff;
+.row_btn a#btn_view {
+    background-color: #3498db;
 }
 
-#btn_buy:hover {
+.row_btn a:hover {
     background-color: #219150;
 }
 
-#btn_view {
-    background-color: #3498db;
-    color: #fff;
-}
-
-#btn_view:hover {
+.row_btn a#btn_view:hover {
     background-color: #2980b9;
-}
-
-input[type="checkbox"] {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    transform: scale(1.5);
-    cursor: pointer;
 }
