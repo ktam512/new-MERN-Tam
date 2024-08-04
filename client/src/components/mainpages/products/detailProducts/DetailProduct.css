@@ -1,83 +1,88 @@
-.detail{
-    max-width: 1000px;
-    width:100%;
+/* DetailProduct.css */
+.detail {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
-    padding:50px;
-    font-size:100%;
-    background-color: rgb(36, 36, 36);
-    margin:20px auto;
-    padding:20px;
-    border-radius: 20px;
-  
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1000px;
 }
 
-.detail img{
-    max-width:300px;
-    width:250px;
-    margin:20px;
-    height:250px;
+.detail img {
+    max-width: 100%;
+    border-radius: 10px;
     object-fit: cover;
-    display: block;
-    margin:30px 0;
-    padding:10px;
-    border:2px solid whitesmoke;
-}
-.detail img:hover{
-    transform: scale(1.3)
-}
-.box-detail{
-    max-width: 500px;
-    width:100%;
-    margin:5px 20px;
+    flex: 1;
 }
 
-.box-detail .row{
+.box-detail {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box-detail .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 
-.box-detail h2{
-    text-transform: uppercase;
-    color:white;
-    letter-spacing: 2px;
-    font-weight: 2rem;
+.box-detail h2 {
+    font-size: 2rem;
+    color: #333;
 }
 
-.box-detail h6{
-    text-transform: uppercase;
-    color:white;
-    letter-spacing: 2px;
-    font-weight: 700;
-    padding:5px 10px;
-    border-radius:10px;
-    font-size:19px;
-    background-color: rgb(230, 14, 122);
-}
-.box-detail h5{
-    text-transform: uppercase;
-    color:rgb(204, 15, 15);
-    letter-spacing: 2px;
-    font-weight: 700;
-    font-size:19px;
-}
-.box-detail p{
-    line-height: 1.5;
-    margin:10px 0;
-    opacity:0.8;
-    color:white;
-    border-bottom: 1px solid honeydew;
-    padding:10px 0;
+.box-detail h6 {
+    font-size: 1rem;
+    color: #777;
 }
 
-.box-detail .cart{
-    background:black;
-    color:white;
-    margin-top: 10px;
-    padding: 10px 25px;
-    display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.box-detail h5 {
+    font-size: 1.5rem;
+    color: #27ae60;
+    margin: 10px 0;
+}
+
+.box-detail p {
+    font-size: 1.3rem;
+    color: #777;
+    margin: 10px 0;
+}
+
+.box-detail h4 {
+    font-size: 1.6rem;
+    color: #333;
+    text-decoration: underline;
+    margin: 10px 0;
+}
+
+.box-detail .cart {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s;
+    margin-top: 20px;
+    align-self: start;
+}
+
+.box-detail .cart:hover {
+    background-color: #219150;
+}
+
+.products {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-items: center;
+    margin: 20px auto;
 }

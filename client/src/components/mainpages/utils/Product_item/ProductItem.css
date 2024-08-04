@@ -1,105 +1,94 @@
-.product_card{
-    max-width: 200px;
-    overflow: hidden;
-    height: 400px;
-    padding:0 15px;
-   
-    margin:10px 0 10px 0;
-    position: relative;
-   
-    background-color: rgb(247, 247, 247);
-}
-.product_card:hover{
-    box-shadow: 10px 10px 15px rgb(48, 48, 48);
+/* ProductItem.css */
+.product-card {
+    background-color: #fff;
     border-radius: 10px;
-    background-color: floralwhite;
-    transform: scale(1.1);
-}
-.product_card img{
-    width:150px;
-    height: 150px;
-    display: block;
-    object-fit: cover;
-   margin:15px auto;
-    border-radius: 20px 10px;
-}
-.product_card img:hover{
-    transform: scale(1.1);
-}
-.product_box{
-    margin-top: 2px;
-    border-bottom: 1.5px solid rgb(3, 2, 2);
-    padding: 8px;
-    
-}
-.product_card input{
-    position: absolute;
-    height: 25px;
-    width: 25px;
-    z-index: 4;
-}
-.product_box h2{
-    width:100%;
-    text-overflow: ellipsis;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    white-space: nowrap;
-    text-transform: capitalize;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-   font-weight: 400;
+    margin: 20px;
+    padding: 20px;
     text-align: center;
-    font-size: 20px;
-    
-}
-.product_card h1{
-    color:rgb(187, 19, 61);
-    text-align: center;
-    font-weight: 400;
-    font-size:16px;
-   
-}
-
-.product_box p{
+    transition: transform 0.2s, box-shadow 0.2s;
     width: 100%;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    height: 70px;
-    overflow: hidden;
-    font-weight: 300;
-    color: rgb(20, 19, 78);
-}
-
-.row_btn{
-    width: 100%;
-    margin-top: 10px;
+    max-width: 300px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
-.row_btn a{
-    width: 50%;
-    text-align: center;
-    text-transform: uppercase;
-    color:rgb(255, 255, 255);
-    font-weight: 600;
-    letter-spacing: 2;
-    padding: 6px;
-    border-radius: 5px;
-    filter:drop-shadow(3px 2px 3px)
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-#btn_buy{
-    background: rgb(32, 95, 95);
-    margin-right: 5px;
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
 }
-#btn_view{
-    background: rgb(12, 77, 107);
-    margin-left: 5px;
+
+.product_box {
+    padding: 15px;
 }
-#btn_view:hover{
-    transform: scale(1.05);
+
+.product_box h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
 }
-#btn_buy:hover{
-    transform: scale(1.05);
+
+.product_box span {
+    font-size: 1.2rem;
+    color: #27ae60;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.product_box p {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 10px;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.row_btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.row_btn a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#btn_buy {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+#btn_buy:hover {
+    background-color: #219150;
+}
+
+#btn_view {
+    background-color: #3498db;
+    color: #fff;
+}
+
+#btn_view:hover {
+    background-color: #2980b9;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transform: scale(1.5);
+    cursor: pointer;
 }

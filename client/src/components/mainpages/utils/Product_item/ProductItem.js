@@ -34,7 +34,7 @@ function ProductItem({product, isAdmin}){
                     BUY
                 </Link>
                 <Link id="btn_view" to={`/detail/${product._id}`}>
-                    View
+                    VIEW
                 </Link>
                 </>
                }

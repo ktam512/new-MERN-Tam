@@ -30,8 +30,8 @@ function DetailProduct() {
                     <h6>ID: {detailProduct.product_id}</h6>
                 </div>
                 <h5>${detailProduct.price}</h5>
-                <p> <h4 style={{textDecoration:'underline' , color:'whitesmoke'}}>Content:</h4> {detailProduct.content}</p>
-                <p><h4 style={{textDecoration:'underline' , color:'whitesmoke'}}>Description : </h4>{detailProduct.description}</p>
+                <p> <h4 style={{textDecoration:'underline' }}>Content:</h4> {detailProduct.content}</p>
+                <p><h4 style={{textDecoration:'underline'}}>Description : </h4>{detailProduct.description}</p>
                 <p>SOLD:  {detailProduct.sold}</p>
                 <Link to="/cart" className="cart">BUY NOW</Link>
             </div>
