@@ -4,28 +4,21 @@ import Loading from '../utils/Loading/Loading';
 import ProductItem from '../utils/Product_item/ProductItem';
 import "./Product.css"
 import axios from "axios"
+import { set } from 'mongoose';
 function Products() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productsAPI.products
     const [isAdmin] = state.userAPI.isAdmin
     const addCart = state.userAPI.addCart
-
-    const getProducts = async()=>{
-        const res = await axios.get('/api/products')
-        setProducts(res.data.products)
-    }
-
-    useEffect(()=>{
-        getProducts()
-    },[])
-
+    const [callback, setCallback] = state.productAPI.callback
+  
     return (
         <>
         <div className='products'>
             {
                 products.map(product => {
                     return <ProductItem key = {product._id} product = {product}
-                    isAdmin={isAdmin}/>
+                    isAdmin={isAdmin} callback = {callback} setCallback={setCallback}/>
                 })
 
             }

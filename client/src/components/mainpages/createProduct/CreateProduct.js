@@ -3,7 +3,7 @@ import axios from "axios";
 import {GlobalState} from "../../../GlobalState"
 import Loading from "../utils/Loading/Loading"
 import "./CreateProduct.css"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 
 const initialState = {
     product_id:'',
@@ -24,6 +24,28 @@ function CreateProduct(){
     const [isAdmin] = state.userAPI.isAdmin
     const [token] = state.token
     const navigate = useNavigate()
+    const param = useParams()
+    const [products, setProducts] = state.productsAPI.products
+    const [onEdit, setOnEdit] = useState(false)
+    
+    const [callback, setCallback] = state.productsAPI.callback
+
+    useEffect(()=>{
+        if(param.id){
+            setOnEdit(true)
+            products.forEach(product => {
+                if (product._id === param.id) {
+                    setProduct(product) 
+                    setImages(product.images)
+                }
+            })
+            
+        } else{
+            setOnEdit(false)
+            setImages(false)
+            setProduct(initialState)
+        }
+    },[param.id])
 
     const styleUpload = {
         display: images ? 'block' : 'none'
@@ -74,12 +96,22 @@ function CreateProduct(){
         try {
             if(!isAdmin) return alert("you are not Admin")
             if(!images) return alert("no image found")
-            await axios.post(`/api/products/`, {...product, images}, {
-                headers: {Authorization : token}
-            })
+            if(onEdit){
+                await axios.put(`/api/products/${product._id}`, {...product, images}, {
+                    headers: {Authorization : token}
+                })
+
+            }else{
+                await axios.post(`/api/products/`, {...product, images}, {
+                    headers: {Authorization : token}
+                })
+            }
+            
             setImages(false)
             setProduct(initialState)
-            navigate.push('/')
+            setCallback(!callback)
+            navigate('/')
+
         } catch (err) {
             alert(err.response.data.msg)
         }
@@ -102,7 +134,7 @@ function CreateProduct(){
                 <div className="row">
                     <label htmlFor="product_id">Product ID</label>
                     <input type="text" name="product_id" id="product_id"
-                    required value={product.product_id} onChange = {handleChangeInput}/>
+                    required value={product.product_id} onChange = {handleChangeInput} disabled = {onEdit}/>
                 </div>
                 <div className="row">
                     <label htmlFor="title">Title</label>
@@ -138,7 +170,7 @@ function CreateProduct(){
                         }
                      </select>
                 </div>
-                <button type="submit">Create Product</button>
+                <button type="submit">{onEdit ? "Edit Product" : "Create Product"}</button>
             </form>
             
         </div>
