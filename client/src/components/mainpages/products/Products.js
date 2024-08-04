@@ -6,6 +6,7 @@ import "./Product.css"
 import axios from "axios"
 import { set } from 'mongoose';
 import Filters from "../utils/Product_item/Filters"
+import LoadMore from '../utils/Product_item/LoadMore';
 function Products() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productsAPI.products
@@ -69,6 +70,7 @@ function Products() {
 
             }
         </div>
+        <LoadMore />
         {
             products.length === 0 && <Loading/>
         }
